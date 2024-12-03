@@ -2,6 +2,8 @@ import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 
+from config import get_settings
+
 
 
 logging.basicConfig(
@@ -12,13 +14,15 @@ logging.basicConfig(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
 
-def get_app():
+def get_app() -> ApplicationBuilder:
     settings = get_settings()
-
-if __name__ == '__main__':
-    application = ApplicationBuilder().token(token).build()
+    
+    app = ApplicationBuilder().token().build(settings.)
     
     start_handler = CommandHandler('start', start)
-    application.add_handler(start_handler)
+    app.add_handler(start_handler)
     
-    application.run_polling()
+    return app
+
+if __name__ == '__main__':
+    get_app().run_polling()

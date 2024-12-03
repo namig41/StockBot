@@ -5,7 +5,7 @@ from urllib.parse import urljoin
 from httpx import AsyncClient
 
 from dtos.product import ProductListItemDTO
-from exceptions.products import ProductListRequestError
+from exceptions.products import ProductListRequestException
 from services.constants import PRODUCT_LIST_URI
 from services.converters.products import convert_product_response_to_chat_dto
 
@@ -29,7 +29,7 @@ class StockWebService(BaseChatWebService):
         )
         
         if not response.is_success:
-            raise ProductListRequestError(status_code=response.status_code, response_content=response.content.decode())
+            raise ProductListRequestException(status_code=response.status_code, response_content=response.content.decode())
         
         json_data = response.json()
         
