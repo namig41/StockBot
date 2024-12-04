@@ -1,1 +1,0 @@
-PRODUCT_LIST_URI = "/products"
