@@ -13,9 +13,11 @@ class ProjectSettings(BaseSettings):
     GREETING_TEXT: str = env(
         "GREETING_TEXT",
         default=(
-            "Добро пожаловать в бот техподдержки."
-            "Пожалуйста выберите чат для работы с клиентом."
-            "\nПолучить список продуктов /products."
+            "Добро пожаловать в бот техподдержки.\n"
+            "Список доступных команд:\n"
+            "/batches - Получить список продуктов\n"
+            "/batch - Получить продукт по номеру\n"
+            "/add_batch - Добавить новый продукт\n"
         ),
     )
     WEB_API_BASE_URL: str = env("WEB_API_BASE_URL", default="http://localhost:8000")

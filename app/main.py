@@ -1,7 +1,11 @@
 import logging
 
 from handlers.base import start_handler
-from handlers.batches import get_all_batches_handler
+from handlers.batches import (
+    add_batch_handler,
+    get_all_batches_handler,
+    get_batch_handler,
+)
 from settings import (
     get_settings,
     ProjectSettings,
@@ -30,8 +34,20 @@ def get_app() -> Application:
         get_all_batches_handler,
     )
 
+    get_batch_command_handler: CommandHandler = CommandHandler(
+        "batch",
+        get_batch_handler,
+    )
+
+    add_batch_command_handler: CommandHandler = CommandHandler(
+        "add_batch",
+        add_batch_handler,
+    )
+
     app.add_handler(start_command_handler)
     app.add_handler(get_all_batches_command_handler)
+    app.add_handler(get_batch_command_handler)
+    app.add_handler(add_batch_command_handler)
 
     return app
 

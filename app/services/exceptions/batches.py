@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from exceptions.base import ApplicationException
+from services.exceptions.base import ServicesException
 
 
 @dataclass(frozen=True, eq=False)
-class BatchListRequestException(ApplicationException):
+class BatchListRequestException(ServicesException):
     status_code: int
     response_content: str
 
