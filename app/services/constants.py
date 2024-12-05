@@ -1,1 +1,1 @@
-PRODUCT_LIST_URI = "/batches/"
+BATCH_LIST_URI = "/batches/"

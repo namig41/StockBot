@@ -1,11 +1,11 @@
 import logging
 
-from app.settings import (
+from handlers.base import start_handler
+from handlers.batches import get_all_batches_handler
+from settings import (
     get_settings,
     ProjectSettings,
 )
-from handlers.base import start_handler
-from handlers.products import get_all_products_handler
 from telegram.ext import (
     Application,
     ApplicationBuilder,
@@ -14,7 +14,8 @@ from telegram.ext import (
 
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
 )
 
 
@@ -24,11 +25,13 @@ def get_app() -> Application:
     app: Application = ApplicationBuilder().token(token=settings.TG_BOT_TOKEN).build()
 
     start_command_handler: CommandHandler = CommandHandler("start", start_handler)
-    get_all_products_command_handler: CommandHandler = CommandHandler(
-        "products", get_all_products_handler,
+    get_all_batches_command_handler: CommandHandler = CommandHandler(
+        "batches",
+        get_all_batches_handler,
     )
+
     app.add_handler(start_command_handler)
-    app.add_handler(get_all_products_command_handler)
+    app.add_handler(get_all_batches_command_handler)
 
     return app
 

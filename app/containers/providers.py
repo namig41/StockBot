@@ -1,10 +1,10 @@
-from app.settings import ProjectSettings
 from dishka import (
     provide,
     Provider,
     Scope,
 )
 from httpx import AsyncClient
+from settings import ProjectSettings
 
 from services.web import (
     BaseChatWebService,

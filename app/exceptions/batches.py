@@ -4,7 +4,7 @@ from exceptions.base import ApplicationException
 
 
 @dataclass(frozen=True, eq=False)
-class ProductListRequestException(ApplicationException):
+class BatchListRequestException(ApplicationException):
     status_code: int
     response_content: str
 

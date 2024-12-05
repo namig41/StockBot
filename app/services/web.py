@@ -7,10 +7,10 @@ from urllib.parse import urljoin
 
 from httpx import AsyncClient
 
-from dtos.product import ProductListItemDTO
-from exceptions.products import ProductListRequestException
-from services.constants import PRODUCT_LIST_URI
-from services.converters.products import convert_product_response_to_chat_dto
+from dtos.batch import BatchListItemDTO
+from exceptions.batches import BatchListRequestException
+from services.constants import BATCH_LIST_URI
+from services.converters.products import convert_batch_response_to_chat_dto
 
 
 @dataclass
@@ -19,19 +19,19 @@ class BaseChatWebService(ABC):
     base_url: str
 
     @abstractmethod
-    async def get_all_products(self) -> list[ProductListItemDTO]: ...
+    async def get_all_batches(self) -> list[BatchListItemDTO]: ...
 
 
 @dataclass
 class StockWebService(BaseChatWebService):
 
-    async def get_all_products(self) -> list[ProductListItemDTO]:
+    async def get_all_batches(self) -> list[BatchListItemDTO]:
         response = await self.http_client.get(
-            url=urljoin(base=self.base_url, url=PRODUCT_LIST_URI),
+            url=urljoin(base=self.base_url, url=BATCH_LIST_URI),
         )
 
         if not response.is_success:
-            raise ProductListRequestException(
+            raise BatchListRequestException(
                 status_code=response.status_code,
                 response_content=response.content.decode(),
             )
@@ -39,6 +39,6 @@ class StockWebService(BaseChatWebService):
         json_data = response.json()
 
         return [
-            convert_product_response_to_chat_dto(product_data=product_data)
-            for product_data in json_data["batches"]
+            convert_batch_response_to_chat_dto(batch_data=batch_data)
+            for batch_data in json_data["batches"]
         ]

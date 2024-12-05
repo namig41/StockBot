@@ -1,8 +1,8 @@
-from dtos.product import ProductListItemDTO
+from dtos.batch import BatchListItemDTO
 
 
-def convert_product_response_to_chat_dto(product_data: dict) -> ProductListItemDTO:
-    return ProductListItemDTO(
-        reference=product_data["reference"],
-        sku=product_data["sku"],
+def convert_batch_response_to_chat_dto(batch_data: dict) -> BatchListItemDTO:
+    return BatchListItemDTO(
+        reference=batch_data["reference"],
+        sku=batch_data["sku"],
     )
